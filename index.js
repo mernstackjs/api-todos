@@ -23,6 +23,15 @@ app.get('/health', (req, res) => {
   res.json({ message: 'App Health is OKi' });
 });
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Welcome to the Todo API',
+    version: '1.0.0',
+    status: 'Server is up and running',
+  });
+});
+
 const axios = require('axios');
 
 setInterval(
