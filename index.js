@@ -23,6 +23,18 @@ app.get('/health', (req, res) => {
   res.json({ message: 'App Health is OKi' });
 });
 
+const axios = require('axios');
+
+setInterval(
+  () => {
+    axios
+      .get('https://bcu25d-api-todos.onrender.com/health')
+      .then(() => console.log('Self-ping successful'))
+      .catch((err) => console.error('Self-ping failed', err.message));
+  },
+  10 * 60 * 1000,
+);
+
 const startServer = async () => {
   try {
     await connectedDb();
@@ -31,6 +43,7 @@ const startServer = async () => {
     });
   } catch (error) {
     console.error('Failed to start server:', error);
+    process.exit(1);
   }
 };
 
